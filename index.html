@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Rescata a tu personaje favorito antes de que se vacíe el reloj de arena." />
+    <title>¡Rescata a tu personaje favorito!</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Orbitron:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="hex-layer" aria-hidden="true"></div>
+    <canvas id="fx-canvas" class="fx-canvas" aria-hidden="true"></canvas>
+
+    <div id="app" class="app" data-character="sonic" data-status="idle">
+      <div class="app-frame">
+        <header class="hero">
+          <h1>¡Rescata a tu personaje favorito!</h1>
+          <p class="tagline">Completa tu misión antes de que se vacíe la arena.</p>
+        </header>
+
+        <section class="characters" aria-label="Selección de personaje">
+          <p class="section-label">Elige a quién vas a rescatar</p>
+          <div id="character-list" class="character-list"></div>
+        </section>
+
+        <section class="stage">
+          <article class="panel video-panel" aria-label="Video del personaje">
+            <div class="panel-chrome">
+              <span class="panel-index">01</span>
+              <span class="panel-name">Transmisión</span>
+            </div>
+            <div class="video-stage" id="video-stage">
+              <img id="poster" class="poster" alt="" />
+              <video id="player" class="player" muted playsinline></video>
+              <div id="video-badge" class="video-badge" hidden>Video pendiente</div>
+            </div>
+          </article>
+
+          <article class="panel hourglass-panel" aria-label="Reloj de arena">
+            <div class="panel-chrome">
+              <span class="panel-index">02</span>
+              <span class="panel-name">Reloj de arena</span>
+            </div>
+            <div id="hourglass" class="hourglass"></div>
+            <p id="hourglass-clock" class="hourglass-clock">10:00</p>
+          </article>
+
+          <article class="panel config-panel" aria-label="Configuración del timer">
+            <div class="panel-chrome">
+              <span class="panel-index">03</span>
+              <span class="panel-name">Misión</span>
+            </div>
+
+            <div class="config-body">
+              <label class="field-label" for="minutes-value">Minutos</label>
+              <div class="stepper">
+                <button type="button" id="minutes-down" class="stepper-btn" aria-label="Quitar un minuto">−</button>
+                <output id="minutes-value" class="stepper-value">10</output>
+                <button type="button" id="minutes-up" class="stepper-btn" aria-label="Sumar un minuto">+</button>
+              </div>
+
+              <label class="field-label" for="beep-interval">Aviso sonoro</label>
+              <div id="beep-interval" class="segmented" role="radiogroup" aria-label="Intervalo del beep">
+                <button type="button" class="seg-btn" data-beep="5">5s</button>
+                <button type="button" class="seg-btn is-active" data-beep="10">10s</button>
+                <button type="button" class="seg-btn" data-beep="30">30s</button>
+                <button type="button" class="seg-btn" data-beep="0">Silencio</button>
+              </div>
+
+              <div class="config-actions">
+                <button type="button" id="toggle-run" class="btn btn-primary">Iniciar</button>
+                <button type="button" id="reset" class="btn btn-ghost">Reiniciar</button>
+              </div>
+            </div>
+          </article>
+        </section>
+
+        <button type="button" id="finish" class="cta" disabled>He terminado</button>
+      </div>
+    </div>
+
+    <div id="outcome" class="outcome" hidden>
+      <div class="outcome-card">
+        <p id="outcome-kicker" class="outcome-kicker"></p>
+        <h2 id="outcome-title" class="outcome-title"></h2>
+        <p id="outcome-copy" class="outcome-copy"></p>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
